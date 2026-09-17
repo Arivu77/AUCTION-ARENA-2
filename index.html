@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Auction Arena — The ultimate real-time multiplayer sports auction platform. Build your dream team, outsmart rivals, and dominate the leaderboard." />
+    <meta name="theme-color" content="#050505" />
+    <meta property="og:title" content="Auction Arena" />
+    <meta property="og:description" content="Bid. Build. Win. The ultimate real-time multiplayer auction experience." />
+    <title>Auction Arena — Bid. Build. Win.</title>
+    <style>
+      /* Inline splash — shown before React mounts */
+      body { margin: 0; background: #050505; }
+      #aa-splash {
+        position: fixed; inset: 0; z-index: 9999;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        background: #050505;
+        gap: 28px;
+        transition: opacity 0.4s ease;
+      }
+      #aa-splash.hide { opacity: 0; pointer-events: none; }
+      .aa-splash-logo {
+        font-size: 4.5rem;
+        animation: aa-pulse 1.8s ease-in-out infinite;
+        filter: drop-shadow(0 0 24px rgba(123,97,255,0.8));
+      }
+      .aa-splash-title {
+        font-family: 'Orbitron', 'Segoe UI', sans-serif;
+        font-size: 1.5rem; font-weight: 900;
+        letter-spacing: 0.18em; text-transform: uppercase;
+        background: linear-gradient(135deg, #00D9FF, #7B61FF, #FF3CAC);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .aa-splash-ring {
+        width: 64px; height: 64px; border-radius: 50%;
+        border: 2px solid rgba(123,97,255,0.15);
+        border-top: 2px solid #7B61FF;
+        animation: aa-spin 0.9s linear infinite;
+      }
+      .aa-splash-text {
+        color: rgba(255,255,255,0.3);
+        font-family: 'Orbitron', 'Segoe UI', sans-serif;
+        font-size: 0.65rem; letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      @keyframes aa-spin { to { transform: rotate(360deg); } }
+      @keyframes aa-pulse {
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 24px rgba(123,97,255,0.8)); }
+        50% { transform: scale(1.1); filter: drop-shadow(0 0 40px rgba(0,217,255,0.9)); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="aa-splash">
+      <div class="aa-splash-logo">🏆</div>
+      <div class="aa-splash-title">Auction Arena</div>
+      <div class="aa-splash-ring"></div>
+      <div class="aa-splash-text">Loading...</div>
+    </div>
+    <div id="root"></div>
+    <script>
+      // Remove splash once React has rendered
+      window.__removeSplash = function() {
+        var splash = document.getElementById('aa-splash');
+        if (!splash) return;
+        splash.classList.add('hide');
+        setTimeout(function() { splash && splash.remove(); }, 450);
+      };
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
